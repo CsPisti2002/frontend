@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet,Text, TextInput, View,TouchableOpacity } from 'react-native';
 
 
-const ipcim="172.16.0.193";
+//const ipcim="192.168.1.11";
+const IP = require('./ipcim.js');
 
 
 export default class Bevitel extends Component {
@@ -20,7 +21,7 @@ export default class Bevitel extends Component {
     //alert(szam)
     this.setState({})
 
-    return fetch('http://'+ipcim+':3000/tema')
+    return fetch('http://'+IP.ipcim+'/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -53,7 +54,7 @@ felvitel=async ()=>{
       bevitel3:this.props.tema_bevitel
     }
 
-    fetch('http://'+ipcim+':3000/kommentfelvitel',{
+    fetch('http://'+IP.ipcim+'/kommentfelvitel',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -73,8 +74,8 @@ felvitel=async ()=>{
 
   render() {
     return (
-    <View style = {{backgroundColor:'#544a2c',width:'100%',borderRadius:30,alignSelf:'center'}}>
-      <View style={{padding: 40}}>
+    <View style = {{backgroundColor:'#5c8a8a',width:'100%',borderRadius:30,borderWidth:10,alignSelf:'center'}}>
+      <View style={{padding: 40 }}>
           <Text style={{padding: 15, fontSize: 25,color:'#e3b627',textAlign:'center'}}>
               Név:
           </Text>

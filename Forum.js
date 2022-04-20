@@ -3,7 +3,9 @@ import {StyleSheet, FlatList, ActivityIndicator, Text, View, Image , TouchableOp
 import { TextInput } from 'react-native-gesture-handler';
 
 
-const ipcim="172.16.0.193";
+//const ipcim="192.168.1.11";
+const IP = require('./ipcim.js');
+
 
 export default class FetchExample extends React.Component {
 
@@ -33,7 +35,7 @@ feladat:"",
       bevitel1:this.state.feladat
      
     }
-fetch('http://'+ipcim+':3000/kereses', {
+fetch('http://'+IP.ipcim+'/kereses', {
   method: "POST",
   body: JSON.stringify(bemenet),
   headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -79,7 +81,7 @@ fetch('http://'+ipcim+':3000/kereses', {
       
 
     
-    return fetch('http://'+ipcim+':3000/kerdes')
+    return fetch('http://'+IP.ipcim+'/kerdes')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -105,7 +107,7 @@ fetch('http://'+ipcim+':3000/kereses', {
     let bemenet={
       bevitel1:szam
     }
-    return fetch('http://'+ipcim+':3000/temalekerdez',{
+    return fetch('http://'+IP.ipcim+'/temalekerdez',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -154,14 +156,14 @@ fetch('http://'+ipcim+':3000/kereses', {
    
 
     return(
-      <View style={{flex: 1, paddingTop:20,backgroundColor:'#ff9966'}}>
+      <View style={{flex: 1, paddingTop:20,backgroundColor:'#5c8a8a'}}>
 {/*--------------------------------------------------------------------------témák */}        
 
 {/* ----------------------------------------------------uj class meghivasa*/}
 <View style={{flexDirection:"row",flex:1,marginBottom:100}}>
 <TextInput
           placeholderTextColor="#ffda6b"
-          style={{ height:60, minWidth:150,borderRadius:15,backgroundColor:'#367588',padding:10,borderColor:'black',color:"white",marginLeft: "auto", flex: 1}}
+          style={{ height:60, minWidth:150,borderRadius:15,backgroundColor:'#666699',padding:10,borderColor:'black',color:"white",marginLeft: "auto", flex: 1}}
           placeholder="Mire szeretnél rákeresni?"
           onChangeText={(feladat) => this.setState({feladat})}
           value={this.state.feladat}
@@ -192,7 +194,7 @@ fetch('http://'+ipcim+':3000/kereses', {
           data={this.state.dataSource}
           renderItem={({item}) => 
 
-          <View style={{borderWidth:3,margin:20,backgroundColor:"#ff7733",paddingLeft:10,paddingRight:10,borderRadius:15}}>
+          <View style={styles.container} /*style={{borderWidth:3,margin:20,backgroundColor:"#ff7733",paddingLeft:10,paddingRight:10,borderRadius:15}}*/>
 
          
          
@@ -228,6 +230,21 @@ fetch('http://'+ipcim+':3000/kereses', {
 
 const styles = StyleSheet.create({
   
+  container:{
+    borderRadius:25,
+    marginBottom:100,
+     padding:20,
+     backgroundColor:'#d9d9d9',
+     shadowColor: "#000000",
+     shadowOpacity: 30,
+     shadowRadius: 50,
+     shadowOffset: {
+       height: 20,
+       width: 15
+     }
+    },
+
+
   gombSzoveg:{
     textAlign:'center',
     color:'white',
@@ -239,7 +256,7 @@ gomb:{
   width:110,
   height:60,
   marginRight:"auto",
-  backgroundColor:'#ff7733',
+  backgroundColor:'#667399',
   borderRadius:15,
   padding: 10,
 
